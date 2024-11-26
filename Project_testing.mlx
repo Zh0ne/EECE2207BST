@@ -1,0 +1,102 @@
+% methods('BinarySearchTree')
+% % Create an instance of the BinarySearchTree class
+% bst = BinarySearchTree();
+% 
+% % Add some nodes
+% bst = bst.add(43);
+% bst = bst.add(35);
+% bst = bst.add(20);
+% bst = bst.add(75);
+% bst = bst.add(10);
+% 
+% 
+% % Display the tree structure before deletion
+% disp('Before deletion:');
+% bst.display();
+% 
+% % Delete a node (e.g., 5)
+% [bst, deleted_value] = bst.delete(43);
+% disp(['Deleted value: ', num2str(deleted_value)]);
+% 
+% % Display the tree structure after deletion
+% disp('After deletion:');
+% bst.display();
+
+methods('BinarySearchTree')
+
+% Test cases for adding nodes
+disp('Test Case 1: Adding predefined nodes.');
+bst = BinarySearchTree();
+predefined_nodes = [43, 35, 20, 75, 10];
+
+disp('Adding predefined nodes:');
+for i = 1:length(predefined_nodes)
+    disp(['Adding node: ', num2str(predefined_nodes(i))]);
+    bst = bst.add(predefined_nodes(i));
+end
+
+% Display the tree structure after adding predefined nodes
+disp('Tree after adding predefined nodes:');
+bst.display();
+
+% User Input for Adding Nodes
+disp('Test Case 2: Adding user-input nodes.');
+disp('Enter values to add to the Binary Search Tree (positive integers only).');
+while true
+    user_input = input('Enter a positive integer (or type "done" to finish): ', 's');
+    
+    if strcmpi(user_input, 'done')
+        break; % Exit the loop if user types 'done'
+    end
+    
+    % Validate the input
+    num = str2double(user_input);
+    if isnan(num) || num <= 0 || floor(num) ~= num
+        disp('Invalid input. Please enter a positive integer.');
+    else
+        bst = bst.add(num); % Add the valid positive integer to the BST
+        disp(['Added node: ', num2str(num)]);
+    end
+end
+
+% Display the tree structure after user additions
+disp('Tree after user-input additions:');
+bst.display();
+
+
+% Test Case for Node Deletion
+disp('Test Case 3: Deleting a predefined node (43).');
+[bst, deleted_value] = bst.delete(43);
+disp(['Deleted predefined node: ', num2str(deleted_value)]);
+disp('Tree after deleting predefined node:');
+bst.display();
+
+% User Input for Deleting a Node
+disp('Test Case 4: Deleting a user-specified node.');
+while true
+    user_input = input('Enter a node value to delete (positive integer): ', 's');
+
+    % Validate the input
+    num = str2double(user_input);
+    if isnan(num) || num <= 0 || floor(num) ~= num
+        disp('Invalid input. Please enter a positive integer.');
+    else
+        [bst, deleted_value] = bst.delete(num); % Delete the node
+        disp(['Deleted value: ', num2str(deleted_value)]);
+        break; % Exit loop after successful deletion
+    end
+end
+
+% Display the tree structure after user-specified deletion
+disp('Tree after user-specified deletion:');
+bst.display();
+
+% Test Case for Tree Structure Validation
+disp('Test Case 5: Validate tree structure with multiple operations.');
+bst = bst.add(50);
+bst = bst.add(25);
+[bst, deleted_value] = bst.delete(10);
+disp(['Deleted node during structure validation: ', num2str(deleted_value)]);
+disp('Tree after multiple operations:');
+bst.display();
+
